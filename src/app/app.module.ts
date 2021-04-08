@@ -14,6 +14,7 @@ import { SimpleAlertViewComponent } from './simple-alert-view/simple-alert-view.
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
