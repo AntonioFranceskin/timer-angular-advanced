@@ -1,20 +1,53 @@
 <div>
-    <h1>Timers</h1>
-    <app-timer *ngFor="let timer of timers" init="{{timer}}" (onComplete)="showEndTimerAlert()"></app-timer>
 
-    <button class="add" (click)="showAddTimer()">+</button>
+    <app-tabs>
+        <app-tab title="Timers">
+            <!-- Def 
+                Refrencia dos  componente timer y alert-view
+                Recorre un  arreglo definido  en  el  componente 
+                Para  cada  elemento en el  arreglo  pasa el  valor por  un @Input  al componente  app-timer
+                Recibe  desde el componente  timer un  evento sin  ningun parametro cuando el timer finaliza
+                este llama al metodo showEndTimerAlert  que  cambia  la  propiedad -->
+            <app-timer *ngFor="let timer of timers" init="{{timer}}" (onComplete)="showEndTimerAlert()"></app-timer>
+
+            <!-- Def
+             Muestra un  boton en la parte  inferior de la pantalla  que  llama  al metodo showAddTimer -->
+            <button class="add" (click)="showAddTimer()">+</button>
+
+        </app-tab>
+        <app-tab title="Crono">
+            Crono no disponible
+        </app-tab>
+        <app-tab title="Alarm">
+            Alarma no disponible
+        </app-tab>
+    </app-tabs>
+
+    <!-- Def
+    Muestra una  ventana de alerta 
+    Esta  se  mostrara solo  cuando !isAddTimerVisible es falso
+    Se pasa el siguiente codigo  html  a traves de ng-contents para  que  sea  renderizado  en  la  vista del alert-->
+
+
 
     <app-alert-view [hidden]="!isAddTimerVisible">
         <div header> New Timer</div>
         <label>Set the number of seconds for your timer</label>
-        <input [(ngModel)]="time" type="number">
+        <input [(ngModel)]="time" type="number" #timerInput>
         <button (click)="hideAddTimer()" class="cancel-button">Cancel</button>
         <button (click)="submitAddTimer()">Ok</button>
     </app-alert-view>
 
-    <app-alert-view [hidden]="!isEndTimerAlertVisible">
-        <div header> Timer Ended</div>
-        <div> Your countdown has finished</div>
-        <button (click)="hideAEndTimerAlert()">Ok</button>
-    </app-alert-view>
+    <!--34 1 ng-template, repitiendo contenido en el DOM
+             Genero un template -->
+
+    <ng-template #timeEndTemplate let-message let-title="title">
+        <app-simple-alert-view [title]="title" [message]="message">
+        </app-simple-alert-view>
+    </ng-template>
+    <ng-container [ngTemplateOutlet]="timeEndTemplate" [ngTemplateOutletContext]="{title: 'Game Over', $implicit: 'timer ender'}">
+    </ng-container>
+    <ng-container [ngTemplateOutlet]="timeEndTemplate"> </ng-container>
+    <ng-container [ngTemplateOutlet]="timeEndTemplate"> </ng-container>
+    <ng-container [ngTemplateOutlet]="timeEndTemplate"> </ng-container>
 </div>
