@@ -14,7 +14,7 @@ export class AppComponent {
   constructor() { 
     this.timers = [3, 20, 185];
   }
-
+//Nuevo cambio
 // rama Rama1
 
   public showAddTimer(){
