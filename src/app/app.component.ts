@@ -15,6 +15,8 @@ export class AppComponent {
     this.timers = [3, 20, 185];
   }
 
+//  PRUEBA
+
   public showAddTimer(){
     this.isAddTimerVisible = true;
   }
