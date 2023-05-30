@@ -15,7 +15,7 @@ export class AppComponent {
     this.timers = [3, 20, 185];
   }
 
-// Rama Master
+// rama Rama1
 
   public showAddTimer(){
     this.isAddTimerVisible = true;
